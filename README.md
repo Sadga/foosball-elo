@@ -1,4 +1,4 @@
-# Fosball ELO app
+# Foosball ELO app
 
 ## TODO
 - [ ] Invite links for leagues
