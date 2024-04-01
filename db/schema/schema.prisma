@@ -56,23 +56,27 @@ model VerificationToken {
 }
 
 model League {
-  id        String @id @default(cuid())
-  name      String
-  maxPoints Int    @default(10)
+  id         String @id @default(cuid())
+  name       String
+  maxPoints  Int    @default(10)
+  team1Color String @default("#3b82f6")
+  team2Color String @default("#dc2626")
 
-  players Player[]
-  teams   Team[]
-  matches Match[]
+  players     Player[]
+  teams       Team[]
+  matches     Match[]
 }
 
 model Player {
-  id            String @id @default(cuid())
+  id            String  @id @default(cuid())
   userId        String
   leagueId      String
-  matchesPlayed Int    @default(0)
-  eloFront      Int    @default(1000)
-  eloBack       Int    @default(1000)
-  eloTotal      Int    @default(1000)
+  admin         Boolean @default(false)
+  banned        Boolean @default(false)
+  matchesPlayed Int     @default(0)
+  eloFront      Int     @default(1000)
+  eloBack       Int     @default(1000)
+  eloTotal      Int     @default(1000)
 
   user   User   @relation(fields: [userId], references: [id])
   league League @relation(fields: [leagueId], references: [id])
@@ -109,6 +113,14 @@ model Match {
   score2      Int      @default(0)
   date        DateTime @default(now())
   createdById String
+
+  team1FrontEloDelta Int
+  team1BackEloDelta  Int
+  team2FrontEloDelta Int
+  team2BackEloDelta  Int
+
+  team1EloDelta Int
+  team2EloDelta Int
 
   team1 Team @relation("team1", fields: [team1Id], references: [id])
   team2 Team @relation("team2", fields: [team2Id], references: [id])

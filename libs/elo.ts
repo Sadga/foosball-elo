@@ -4,6 +4,8 @@ export type EloOptions = {
   maxPoints: number;
 }
 
+export const BASE_ELO = 1000;
+
 export function calcEloDeltas (match: MatchWithTeamsAndPlayers, opt: EloOptions = { maxPoints: 10 }) {
   const P = pFactor(match, opt.maxPoints);
 

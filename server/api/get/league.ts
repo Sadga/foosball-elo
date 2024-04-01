@@ -1,4 +1,4 @@
-import { getUser } from '../../../db';
+import { getLeague } from '../../../db';
 import { authOptions } from '../auth/[...]';
 import { getServerSession } from '#auth';
 
@@ -7,7 +7,7 @@ export default defineEventHandler(async (event) => {
   if (!session) { return null; }
 
   const query = getQuery(event);
-  if (!query.userId) { return null; }
+  if (!query.leagueId) { return null; }
 
-  return await getUser(query.userId as string, session?.user.id);
+  return await getLeague(query.leagueId as string, session?.user.id);
 });

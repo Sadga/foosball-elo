@@ -1,7 +1,6 @@
 # Foosball ELO app
 
 ## TODO
-- [ ] Invite links for leagues
 - [ ] Edit user picture
 - [ ] Add dates filter on matches page
 - [ ] Eventually address performance issues on the matches page

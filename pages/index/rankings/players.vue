@@ -16,7 +16,7 @@ const players = ref<PlayerWithUser[]>([]);
 const getPlayers = async () => {
   players.value = [];
   if (!activeLeague?.value) { return; }
-  players.value = (await $fetch('/api/get/players', { query: { leagueId: activeLeague.value.id } })) || [];
+  players.value = (await $fetch('/api/get/league-players', { query: { leagueId: activeLeague.value.id } })) || [];
 };
 
 const displayPlayers = computed(() =>
@@ -60,24 +60,18 @@ watch(() => activeLeague?.value, () => { getPlayers(); }, { immediate: true });
         v-for="player in displayPlayers"
         :key="player.id"
         class="p-1 border rounded-lg text-card-foreground"
+        :class="{ 'opacity-40': player.banned, 'saturate-0': player.banned }"
         :style="{
           'background': player.rank === 1
-            ? '#ffd700'
+            ? 'linear-gradient(90deg, #ffd700 0%, hsl(var(--card)) 95%)'
             : player.rank === 2
-              ? '#C0C0C0'
+              ? 'linear-gradient(90deg, #C0C0C0 0%, hsl(var(--card)) 95%)'
               : player.rank === 3
-                ? '#CD7F32'
+                ? 'linear-gradient(90deg, #CD7F32 0%, hsl(var(--card)) 95%)'
                 : 'transparent'
-          // 'background': player.rank === 1
-          //   ? 'linear-gradient(90deg, #ffd700 0%, hsl(var(--card)) 75%)'
-          //   : player.rank === 2
-          //     ? 'linear-gradient(90deg, #C0C0C0 0%, hsl(var(--card)) 75%)'
-          //     : player.rank === 3
-          //       ? 'linear-gradient(90deg, #CD7F32 0%, hsl(var(--card)) 75%)'
-          //       : 'transparent'
         }"
       >
-        <div class="w-full flex items-center gap-2 p-1 rounded-md bg-card/80">
+        <div class="w-full flex items-center gap-2 p-1 rounded-md bg-card/80" :class="{ 'opacity-60': player.deleted }">
           <span class="text-sm font-semibold">{{ player.rank }}.</span>
           <UserAvatar :user="player.user" class="shrink-0" />
           <span class="w-full shrink-1 overflow-ellipsis">{{ player.user.name }}</span>

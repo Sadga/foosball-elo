@@ -14,27 +14,27 @@ async function saveUser () {
     <UserAvatar :user="user" size="lg" />
     <div class="flex gap-2">
       <span class="text-3xl font-semibold">{{ user.name }}</span>
-      <UiDialog>
-        <UiDialogTrigger>
+      <Modal>
+        <ModalTrigger>
           <UiIcon type="edit" class="text-sm text-muted-foreground"/>
-        </UiDialogTrigger>
-        <UiDialogContent>
-          <UiDialogHeader>
-            <UiDialogTitle>{{ $t('editUser') }}</UiDialogTitle>
-          </UiDialogHeader>
+        </ModalTrigger>
+        <ModalContent>
+          <ModalHeader>
+            <ModalTitle>{{ $t('editUser') }}</ModalTitle>
+          </ModalHeader>
           <div class="grid gap-4 py-4">
             <div class="grid grid-cols-4 items-center gap-4">
               <UiLabel for="user-name" class="text-right">{{ $t('name') }}</UiLabel>
               <UiInput id="user-name" class="col-span-3" v-model="user.name" />
             </div>
           </div>
-          <UiDialogFooter>
-            <UiDialogClose as-child>
+          <ModalFooter>
+            <ModalClose as-child>
               <UiButton type="submit" @click="saveUser">{{ $t('save') }}</UiButton>
-            </UiDialogClose>
-          </UiDialogFooter>
-        </UiDialogContent>
-      </UiDialog>
+            </ModalClose>
+          </ModalFooter>
+        </ModalContent>
+      </Modal>
     </div>
   </div>
 </template>

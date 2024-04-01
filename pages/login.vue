@@ -1,9 +1,16 @@
 <script setup lang="ts">
-definePageMeta({ middleware: 'guest-only', auth: { authenticatedRedirectTo: '/' } });
-const { signIn, signOut, session, status, cookies, getProviders } = useAuth();
+definePageMeta({
+  middleware: (to, from) => {
+    const { session } = useAuth();
 
+    if (session.value) {
+      return navigateTo({ path: to.query.r || '/' });
+    }
+  }
+});
+
+const { signIn } = useAuth();
 const credentials = reactive({ name: 'Test User 1' });
-
 </script>
 
 <template>

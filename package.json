@@ -27,9 +27,11 @@
     "radix-vue": "^1.5.3",
     "sqlite3": "^5.1.7",
     "tailwind-merge": "^2.2.2",
+    "tinycolor2": "^1.6.0",
     "vaul-vue": "^0.1.0",
     "vue": "^3.4.19",
-    "vue-router": "^4.3.0"
+    "vue-router": "^4.3.0",
+    "vue-sonner": "^1.1.2"
   },
   "devDependencies": {
     "@nuxtjs/i18n": "^8.2.0",

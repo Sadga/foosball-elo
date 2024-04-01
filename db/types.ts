@@ -1,4 +1,4 @@
-import type { Match, Player, Team, User } from '@prisma/client';
+import type { Match, Player, Team, User, League } from '@prisma/client';
 
 export type * from '@prisma/client';
 
@@ -29,4 +29,14 @@ export interface MatchWithTeamsAndPlayersAndUsers extends Match {
 export interface NewMatch {
   team1: { backId: string, frontId: string, score: number },
   team2: { backId: string, frontId: string, score: number }
+}
+
+export interface NewLeague {
+  name: string;
+  description: string;
+  userId: string;
+}
+
+export interface LeagueWithAdmins extends League {
+  admins: User[];
 }
