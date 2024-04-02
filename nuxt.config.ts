@@ -7,6 +7,7 @@ export default defineNuxtConfig({
   devServer: { host: '0.0.0.0' },
   modules: ['@hebilicious/authjs-nuxt', '@nuxtjs/tailwindcss', '@nuxtjs/i18n'],
   nitro: {
+    preset: 'cloudflare-pages',
     esbuild: {
       options: {
         target: 'esnext'
@@ -37,7 +38,7 @@ export default defineNuxtConfig({
   app: {
     head: {
       charset: 'utf-8',
-      viewport: 'width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0',
+      viewport: 'width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0'
     }
   }
 });

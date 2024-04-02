@@ -3,7 +3,7 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "build": "nuxt build",
+    "build": "prisma generate && nuxt build && prisma db push",
     "dev": "nuxt dev",
     "generate": "nuxt generate",
     "preview": "nuxt preview",
@@ -17,6 +17,7 @@
     "@auth/core": "^0.17.0",
     "@auth/prisma-adapter": "^1.5.0",
     "@hebilicious/authjs-nuxt": "^0.3.5",
+    "@prisma/adapter-d1": "^5.12.0",
     "@prisma/client": "^5.11.0",
     "@radix-icons/vue": "^1.0.0",
     "@vueuse/core": "^10.9.0",
