@@ -11,6 +11,9 @@ export default defineNuxtConfig({
       options: {
         target: 'esnext'
       }
+    },
+    prerender: {
+      autoSubfolderIndex: false
     }
   },
   runtimeConfig: {
