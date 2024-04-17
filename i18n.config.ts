@@ -72,6 +72,8 @@ export default defineI18nConfig(() => ({
       team1Color: 'Team 1 Color',
       team2Color: 'Team 2 Color',
       invitePlayers: 'Invite Players',
+      noPlayersYet: 'No players yet',
+      noTeamsYet: 'No teams yet',
     },
     it: {
       foosballElo: 'Foosball Elo',
@@ -144,6 +146,8 @@ export default defineI18nConfig(() => ({
       team1Color: 'Colore Squadra 1',
       team2Color: 'Colore Squadra 2',
       invitePlayers: 'Invita Giocatori',
+      noPlayersYet: 'Ancora nessun giocatore',
+      noTeamsYet: 'Ancora nessuna squadra',
     }
   }
 }));

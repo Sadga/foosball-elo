@@ -1,0 +1,11 @@
+name = "foosball-elo"
+main = "./dist/"
+compatibility_date = "2024-04-15"
+compatibility_flags = ["nodejs_compat"]
+node_compat = true
+
+[[ d1_databases ]]
+binding = "DATABASE"
+database_name = "<YOUR DB NAME>"
+database_id = "<YOUR DB ID>"
+migrations_dir = "db/migrations"
