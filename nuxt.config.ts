@@ -16,21 +16,7 @@ export default defineNuxtConfig({
       autoSubfolderIndex: false
     }
   },
-  runtimeConfig: {
-    authJs: {
-      secret: process.env.NUXT_NEXTAUTH_SECRET
-    },
-    google: {
-      clientId: process.env.NUXT_NEXTAUTH_GOOGLE_CLIENT_ID,
-      clientSecret: process.env.NUXT_NEXTAUTH_GOOGLE_CLIENT_SECRET
-    },
-    public: {
-      authJs: {
-        baseUrl: process.env.NUXT_NEXTAUTH_URL,
-        verifyClientOnEveryRequest: true
-      }
-    }
-  },
+  runtimeConfig: {},
   alias: {
     cookie: resolve(__dirname, 'node_modules/cookie')
   },

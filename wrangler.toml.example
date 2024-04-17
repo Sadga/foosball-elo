@@ -9,3 +9,10 @@ binding = "DATABASE"
 database_name = "<YOUR DB NAME>"
 database_id = "<YOUR DB ID>"
 migrations_dir = "db/migrations"
+
+[vars]
+NUXT_NEXTAUTH_SECRET = "<YOUR AUTH SECRET>"
+NUXT_NEXTAUTH_TRUST_HOST = true
+NUXT_NEXTAUTH_URL = "http:localhost:3000"
+NUXT_GOOGLE_CLIENT_ID = "<YOUR GOOGLE CLIENT ID>"
+NUXT_GOOGLE_CLIENT_SECRET = "<YOUR GOOGLE CLIENT SECRET>"
