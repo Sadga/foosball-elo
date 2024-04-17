@@ -17,6 +17,9 @@ export default defineNuxtConfig({
     }
   },
   runtimeConfig: {},
+  authJs: {
+    baseUrl: 'https://foosball.ale.blue/'
+  },
   alias: {
     cookie: resolve(__dirname, 'node_modules/cookie')
   },
