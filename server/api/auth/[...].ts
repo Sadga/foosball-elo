@@ -46,12 +46,12 @@ export function getAuthOptions (event): AuthConfig {
   };
 }
 
-export default defineEventHandler(async (event) => {
+export default defineEventHandler((event) => {
   return NuxtAuthHandler(getAuthOptions(event), {
     public: {
       authJs: {
         baseUrl: event?.context?.cloudflare?.env?.NUXT_NEXTAUTH_URL
       }
     }
-  })(event);
+  })(event).catch((err) => console.log(err));
 });
