@@ -55,30 +55,37 @@ watch(() => activeLeague?.value, () => { getPlayers(); }, { immediate: true });
         </UiTabsList>
       </UiTabs>
     </div>
-    <TransitionList>
-      <div
-        v-for="player in displayPlayers"
-        :key="player.id"
-        class="p-1 border rounded-lg text-card-foreground"
-        :class="{ 'opacity-40': player.banned, 'saturate-0': player.banned }"
-        :style="{
-          'background': player.rank === 1
-            ? 'linear-gradient(90deg, #ffd700 0%, hsl(var(--card)) 95%)'
-            : player.rank === 2
-              ? 'linear-gradient(90deg, #C0C0C0 0%, hsl(var(--card)) 95%)'
-              : player.rank === 3
-                ? 'linear-gradient(90deg, #CD7F32 0%, hsl(var(--card)) 95%)'
-                : 'transparent'
-        }"
-      >
-        <div class="w-full flex items-center gap-2 p-1 rounded-md bg-card/80" :class="{ 'opacity-60': player.deleted }">
-          <span class="text-sm font-semibold">{{ player.rank }}.</span>
-          <UserAvatar :user="player.user" class="shrink-0" />
-          <span class="w-full shrink-1 overflow-ellipsis">{{ player.user.name }}</span>
-          <span class="font-semibold">{{ player[eloType] }}</span>
-          <UiIcon :type="ICON_BY_ELO_TYPE[eloType]"/>
-        </div>
+    <template v-if="displayPlayers.length === 0">
+      <div class="container flex h-full items-center justify-center">
+        <h1 class="text-md pt-16 font-bold text-muted-foreground">{{ $t('noPlayersYet') }}</h1>
       </div>
-    </TransitionList>
+    </template>
+    <template v-else>
+      <TransitionList>
+        <div
+          v-for="player in displayPlayers"
+          :key="player.id"
+          class="p-1 border rounded-lg text-card-foreground"
+          :class="{ 'opacity-40': player.banned, 'saturate-0': player.banned }"
+          :style="{
+            'background': player.rank === 1
+              ? 'linear-gradient(90deg, #ffd700 0%, hsl(var(--card)) 95%)'
+              : player.rank === 2
+                ? 'linear-gradient(90deg, #C0C0C0 0%, hsl(var(--card)) 95%)'
+                : player.rank === 3
+                  ? 'linear-gradient(90deg, #CD7F32 0%, hsl(var(--card)) 95%)'
+                  : 'transparent'
+          }"
+        >
+          <div class="w-full flex items-center gap-2 p-1 rounded-md bg-card/80" :class="{ 'opacity-60': player.deleted }">
+            <span class="text-sm font-semibold">{{ player.rank }}.</span>
+            <UserAvatar :user="player.user" class="shrink-0" />
+            <span class="w-full shrink-1 overflow-ellipsis">{{ player.user.name }}</span>
+            <span class="font-semibold">{{ player[eloType] }}</span>
+            <UiIcon :type="ICON_BY_ELO_TYPE[eloType]"/>
+          </div>
+        </div>
+      </TransitionList>
+    </template>
   </div>
 </template>

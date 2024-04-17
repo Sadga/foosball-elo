@@ -3,54 +3,52 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "build": "prisma generate && nuxt build && prisma db push",
+    "build": "nuxt build",
     "dev": "nuxt dev",
     "generate": "nuxt generate",
     "preview": "nuxt preview",
     "postinstall": "nuxt prepare",
-    "prisma:generate": "prisma generate",
-    "prisma:format": "prisma format",
-    "prisma:migrate": "prisma migrate dev",
-    "prisma:push": "prisma db push"
+    "drizzle:generate": "drizzle-kit generate:sqlite",
+    "drizzle:migrate:local": "wrangler d1 migrations apply foosball --local",
+    "drizzle:migrate:prod": "wrangler d1 migrations apply foosball"
   },
   "dependencies": {
     "@auth/core": "^0.17.0",
-    "@auth/prisma-adapter": "^1.5.0",
+    "@auth/drizzle-adapter": "^0.9.0",
     "@hebilicious/authjs-nuxt": "^0.3.5",
-    "@prisma/adapter-d1": "^5.12.0",
-    "@prisma/client": "^5.11.0",
     "@radix-icons/vue": "^1.0.0",
     "@vueuse/core": "^10.9.0",
+    "cfw-bindings-wrangler-bridge": "^0.10.1",
     "class-variance-authority": "^0.7.0",
     "cookie": "^0.6.0",
+    "drizzle-orm": "^0.29.5",
     "lucide-vue-next": "^0.344.0",
     "luxon": "^3.4.4",
-    "radix-vue": "^1.5.3",
+    "nitro-cloudflare-dev": "^0.1.4",
+    "radix-vue": "^1.7.0",
     "sqlite3": "^5.1.7",
     "tailwind-merge": "^2.2.2",
     "tinycolor2": "^1.6.0",
     "vaul-vue": "^0.1.0",
     "vue": "^3.4.19",
     "vue-router": "^4.3.0",
-    "vue-sonner": "^1.1.2"
+    "vue-sonner": "^1.1.2",
+    "wrangler": "^3.50.0"
   },
   "devDependencies": {
-    "@nuxtjs/i18n": "^8.2.0",
+    "@nuxtjs/i18n": "^8.3.0",
     "@nuxtjs/tailwindcss": "^6.11.4",
-    "@rushstack/eslint-patch": "^1.8.0",
+    "@rushstack/eslint-patch": "^1.10.2",
     "@vue/eslint-config-standard": "^8.0.1",
     "@vue/eslint-config-typescript": "^12.0.0",
     "@vue/tsconfig": "^0.4.0",
+    "drizzle-kit": "^0.20.14",
     "eslint": "^8.57.0",
     "eslint-config-standard": "^17.1.0",
-    "eslint-plugin-vue": "^9.23.0",
-    "nuxt": "^3.11.1",
-    "prisma": "^5.11.0",
-    "tailwindcss": "^3.4.1",
+    "eslint-plugin-vue": "^9.25.0",
+    "nuxt": "^3.11.2",
+    "tailwindcss": "^3.4.3",
     "tailwindcss-animate": "^1.0.7",
-    "typescript": "^5.4.3"
-  },
-  "prisma": {
-    "schema": "db/schema/schema.prisma"
+    "typescript": "^5.4.5"
   }
 }

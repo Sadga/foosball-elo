@@ -32,12 +32,12 @@ const credentials = reactive({ name: 'Test User 1' });
           <h1 class="text-2xl font-semibold tracking-tight">Login</h1>
           <p class="text-sm text-muted-foreground">with</p>
         </div>
-        <UiInput v-model="credentials.name" placeholder="Username"></UiInput>
+        <!-- <UiInput v-model="credentials.name" placeholder="Username"></UiInput>
         <UiButton @click="signIn('credentials', credentials)">
           <UiIcon type="logout" class="mr-2" />
           Username
         </UiButton>
-        <UiSeparator/>
+        <UiSeparator/> -->
         <UiButton @click="signIn('google')">
           <UiIcon type="google" class="mr-2" />
           Google

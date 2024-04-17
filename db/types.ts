@@ -1,6 +1,21 @@
-import type { Match, Player, Team, User, League } from '@prisma/client';
+import {
+  Users,
+  Leagues,
+  Players,
+  Teams,
+  Matches
+} from './schema';
 
-export type * from '@prisma/client';
+export type User = typeof Users.$inferSelect
+export type UserInsert = typeof Users.$inferInsert
+export type League = typeof Leagues.$inferSelect
+export type LeagueInsert = typeof Leagues.$inferInsert
+export type Player = typeof Players.$inferSelect
+export type PlayerInsert = typeof Players.$inferInsert
+export type Team = typeof Teams.$inferSelect
+export type TeamInsert = typeof Teams.$inferInsert
+export type Match = typeof Matches.$inferSelect
+export type MatchInsert = typeof Matches.$inferInsert
 
 export interface PlayerWithUser extends Player {
   user: User;
@@ -29,12 +44,6 @@ export interface MatchWithTeamsAndPlayersAndUsers extends Match {
 export interface NewMatch {
   team1: { backId: string, frontId: string, score: number },
   team2: { backId: string, frontId: string, score: number }
-}
-
-export interface NewLeague {
-  name: string;
-  description: string;
-  userId: string;
 }
 
 export interface LeagueWithAdmins extends League {

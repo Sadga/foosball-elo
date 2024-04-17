@@ -106,14 +106,7 @@ provide('set-active-league', (leagueId: string) => { activeLeagueId.value = leag
       </div>
     </div>
 
-    <template v-if="!activeLeague">
-      <div class="container flex h-full items-center justify-center">
-        <h1 class="text-md pt-16 font-bold text-muted-foreground">{{ $t('selectALeagueOrCreateANewOneToBegin') }}</h1>
-      </div>
-    </template>
-    <template v-else>
-      <NuxtPage />
-    </template>
+    <NuxtPage />
 
     <div class="fixed z-20 w-full bottom-0 bg-background/80 backdrop-blur-lg border-t border-border md:hidden">
       <div class="container px-2 flex h-14 items-center">
