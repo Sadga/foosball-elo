@@ -13,6 +13,9 @@ import { encode, decode } from '@auth/core/jwt';
 const runtimeConfig = useRuntimeConfig();
 
 export function getAuthOptions (event): AuthConfig {
+  console.log(runtimeConfig);
+  console.log(event?.context?.cloudflare?.env);
+
   return {
     secret: runtimeConfig.authJs.secret,
     providers: [
