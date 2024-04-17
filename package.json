@@ -3,7 +3,8 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "build": "prisma generate && nuxt build && prisma db push",
+    "build": "nuxt build",
+    "deploy": "npx wrangler pages deploy",
     "dev": "nuxt dev",
     "generate": "nuxt generate",
     "preview": "nuxt preview",
