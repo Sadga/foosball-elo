@@ -20,14 +20,14 @@ export function getAuthOptions (event): AuthConfig {
         clientId: runtimeConfig.google.clientId,
         clientSecret: runtimeConfig.google.clientSecret
       }),
-      CredentialsProvider({
-        credentials: {
-          name: { label: 'Name' }
-        },
-        async authorize (credentials) {
-          return getUserByName(event, credentials.name);
-        }
-      })
+      // CredentialsProvider({
+      //   credentials: {
+      //     name: { label: 'Name' }
+      //   },
+      //   async authorize (credentials) {
+      //     return getUserByName(event, credentials.name);
+      //   }
+      // })
     ],
     adapter: DrizzleAdapter(getDB(event)),
     callbacks: {
