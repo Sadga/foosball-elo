@@ -13,15 +13,15 @@ import { encode, decode } from '@auth/core/jwt';
 const runtimeConfig = useRuntimeConfig();
 
 export function getAuthOptions (event): AuthConfig {
-  console.log(runtimeConfig);
-  console.log(event?.context?.cloudflare?.env);
+  const env = event?.context?.cloudflare?.env;
+  if (!env) { throw new Error('Missing environment variables'); }
 
   return {
-    secret: runtimeConfig.authJs.secret,
+    secret: env.NUXT_NEXTAUTH_SECRET,
     providers: [
       Google({
-        clientId: runtimeConfig.google.clientId,
-        clientSecret: runtimeConfig.google.clientSecret
+        clientId: env.NUXT_GOOGLE_CLIENT_ID,
+        clientSecret: env.NUXT_GOOGLE_CLIENT_SECRET
       }),
       // CredentialsProvider({
       //   credentials: {
@@ -54,5 +54,11 @@ export function getAuthOptions (event): AuthConfig {
 
 export default defineEventHandler(async (event) => {
   // Refer to Auth.js docs for more details
-  return NuxtAuthHandler(getAuthOptions(event), runtimeConfig)(event);
+  return NuxtAuthHandler(getAuthOptions(event), {
+    public: {
+      authJs: {
+        baseUrl: event?.context?.cloudflare?.env.NUXT_NEXTAUTH_URL
+      }
+    }
+  })(event);
 });
