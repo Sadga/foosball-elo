@@ -1,11 +1,10 @@
 import { resolve } from 'node:path';
 
-// https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
   ssr: false,
   devtools: { enabled: false },
   devServer: { host: '0.0.0.0' },
-  modules: ['@hebilicious/authjs-nuxt', '@nuxtjs/tailwindcss', '@nuxtjs/i18n'],
+  modules: ['@hebilicious/authjs-nuxt', '@nuxtjs/tailwindcss', '@nuxtjs/i18n', 'nitro-cloudflare-dev'],
   nitro: {
     preset: 'cloudflare-pages',
     esbuild: {
@@ -19,7 +18,7 @@ export default defineNuxtConfig({
   },
   runtimeConfig: {
     authJs: {
-      secret: process.env.NUXT_NEXTAUTH_SECRET // You can generate one with `openssl rand -base64 32`
+      secret: process.env.NUXT_NEXTAUTH_SECRET
     },
     google: {
       clientId: process.env.NUXT_NEXTAUTH_GOOGLE_CLIENT_ID,
@@ -27,8 +26,8 @@ export default defineNuxtConfig({
     },
     public: {
       authJs: {
-        baseUrl: process.env.NUXT_NEXTAUTH_URL, // The URL of your deployed app (used for origin Check in production)
-        verifyClientOnEveryRequest: true // whether to hit the /auth/session endpoint on every client request
+        baseUrl: process.env.NUXT_NEXTAUTH_URL,
+        verifyClientOnEveryRequest: true
       }
     }
   },

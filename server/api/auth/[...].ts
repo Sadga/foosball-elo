@@ -1,6 +1,6 @@
 import type { AuthConfig } from '@auth/core/types';
-import { prisma, getUserByName } from '../../../db';
-import { PrismaAdapter } from '@auth/prisma-adapter';
+import { getDB, getUserByName } from '../../../db';
+import { DrizzleAdapter } from '@auth/drizzle-adapter';
 import { NuxtAuthHandler } from '#auth';
 import Google from '@auth/core/providers/google';
 import CredentialsProvider from '@auth/core/providers/credentials';
@@ -12,42 +12,44 @@ import { encode, decode } from '@auth/core/jwt';
 
 const runtimeConfig = useRuntimeConfig();
 
-// Refer to Auth.js docs for more details
-export const authOptions: AuthConfig = {
-  secret: runtimeConfig.authJs.secret,
-  providers: [
-    Google({
-      clientId: runtimeConfig.google.clientId,
-      clientSecret: runtimeConfig.google.clientSecret
-    }),
-    CredentialsProvider({
-      credentials: {
-        name: { label: 'Name' }
-      },
-      async authorize (credentials) {
-        return getUserByName(credentials.name);
+export function getAuthOptions (event): AuthConfig {
+  return {
+    secret: runtimeConfig.authJs.secret,
+    providers: [
+      Google({
+        clientId: runtimeConfig.google.clientId,
+        clientSecret: runtimeConfig.google.clientSecret
+      }),
+      // CredentialsProvider({
+      //   credentials: {
+      //     name: { label: 'Name' }
+      //   },
+      //   async authorize (credentials) {
+      //     return getUserByName(event, credentials.name);
+      //   }
+      // })
+    ],
+    adapter: DrizzleAdapter(getDB(event)),
+    callbacks: {
+      session: async ({ session, token, user }) => {
+        if (session?.user && (user?.id || token?.sub)) {
+          session.user.id = user?.id || token?.sub;
+        }
+        return session;
       }
-    })
-  ],
-  adapter: PrismaAdapter(prisma),
-  callbacks: {
-    session: async ({ session, token, user }) => {
-      if (session?.user && (user?.id || token?.sub)) {
-        session.user.id = user?.id || token?.sub;
-      }
-      return session;
-    }
-    // jwt: async ({ user, token }) => {
-    //   if (user) {
-    //     token.uid = user.id;
-    //   }
-    //   return token;
-    // }
-  },
-  session: { strategy: 'jwt' },
-  jwt: { encode, decode }
-};
+      // jwt: async ({ user, token }) => {
+      //   if (user) {
+      //     token.uid = user.id;
+      //   }
+      //   return token;
+      // }
+    },
+    session: { strategy: 'jwt' },
+    jwt: { encode, decode }
+  };
+}
 
-export default NuxtAuthHandler(authOptions, runtimeConfig);
-// If you don't want to pass the full runtime config,
-//  you can pass something like this: { public: { authJs: { baseUrl: "" } } }
+export default defineEventHandler(async (event) => {
+  // Refer to Auth.js docs for more details
+  return NuxtAuthHandler(getAuthOptions(event), runtimeConfig)(event);
+});
