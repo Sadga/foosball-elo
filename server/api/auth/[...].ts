@@ -53,5 +53,5 @@ export default defineEventHandler((event) => {
         baseUrl: event?.context?.cloudflare?.env?.NUXT_NEXTAUTH_URL
       }
     }
-  })(event); // .catch((err) => console.log(err));
+  })(event).catch(() => { throw Error(event?.path + ' -> ' + event?.context?.cloudflare?.env?.NUXT_NEXTAUTH_URL); });
 });
