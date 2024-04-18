@@ -50,7 +50,7 @@ export default defineEventHandler((event) => {
   return NuxtAuthHandler(getAuthOptions(event), {
     public: {
       authJs: {
-        baseUrl: event?.context?.cloudflare?.env?.NUXT_NEXTAUTH_URL
+        baseUrl: undefined // event?.context?.cloudflare?.env?.NUXT_NEXTAUTH_URL
       }
     }
   })(event).catch(() => { throw Error(event?.web?.url + ' -> ' + event?.context?.cloudflare?.env?.NUXT_NEXTAUTH_URL); });
