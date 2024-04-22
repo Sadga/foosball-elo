@@ -81,7 +81,7 @@ watch(() => activeLeague?.value, () => { getPlayers(); }, { immediate: true });
             <span class="text-sm font-semibold">{{ player.rank }}.</span>
             <UserAvatar :user="player.user" class="shrink-0" />
             <span class="w-full shrink-1 overflow-ellipsis">{{ player.user.name }}</span>
-            <span class="font-semibold">{{ player[eloType] }}</span>
+            <span class="font-semibold">{{ Math.round(player[eloType]) }}</span>
             <UiIcon :type="ICON_BY_ELO_TYPE[eloType]"/>
           </div>
         </div>

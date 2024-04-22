@@ -66,7 +66,7 @@ watch(() => activeLeague?.value, () => { getTeams(); }, { immediate: true });
                 <span class="overflow-ellipsis">{{ team.front.user.name }}</span>
               </div>
             </div>
-            <span class="font-semibold">{{ team.eloTotal }}</span>
+            <span class="font-semibold">{{ Math.round(team.eloTotal) }}</span>
             <UiIcon type="shield-sword"/>
           </div>
         </div>
