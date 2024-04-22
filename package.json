@@ -9,7 +9,7 @@
     "deploy": "npx wrangler pages deploy",
     "drizzle:generate": "drizzle-kit generate:sqlite",
     "drizzle:migrate:local": "wrangler d1 migrations apply foosball --local",
-    "drizzle:migrate:prod": "wrangler d1 migrations apply foosball"
+    "drizzle:migrate:prod": "wrangler d1 migrations apply foosball --remote"
   },
   "dependencies": {
     "@auth/core": "^0.17.0",

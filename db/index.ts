@@ -56,7 +56,8 @@ export async function saveUser (event: Event, user: User, sessionUserId: string)
   if (user.id !== sessionUserId) { throw new Error('invalidUserId'); }
   const DB = getDB(event);
 
-  return await DB.update(schema.Users).set(user).where(eq(schema.Users.id, user.id)).returning();
+  await DB.update(schema.Users).set(user).where(eq(schema.Users.id, user.id));
+  return DB.query.Users.findFirst({ where: eq(schema.Users.id, user.id) });
 }
 
 export async function getLeague (event: Event, leagueId: string, sessionUserId: string) {
@@ -74,7 +75,7 @@ export async function createLeague (event: Event, league: LeagueInsert, sessionU
 
   await DB.insert(schema.Players).values({ userId: sessionUserId, leagueId: newLeague.id, admin: true });
 
-  return newLeague;
+  return await DB.query.Leagues.findFirst({ where: eq(schema.Leagues.id, newLeague.id) });
 }
 
 export async function saveLeague (event: Event, league: League, sessionUserId: string) {
@@ -84,7 +85,8 @@ export async function saveLeague (event: Event, league: League, sessionUserId: s
   const player = await DB.query.Players.findFirst({ where: and(eq(schema.Players.userId, sessionUserId), eq(schema.Players.leagueId, league.id)) });
   if (!player?.admin) { throw new Error('cannotSaveLeague'); }
 
-  return await DB.update(schema.Leagues).set(league).where(eq(schema.Leagues.id, league.id)).returning();
+  await DB.update(schema.Leagues).set(league).where(eq(schema.Leagues.id, league.id));
+  return await DB.query.Leagues.findFirst({ where: eq(schema.Leagues.id, league.id) });
 }
 
 export async function deleteLeague (event: Event, leagueId: string, sessionUserId: string) {
@@ -121,7 +123,8 @@ export async function banPlayer (event: Event, playerId: string, sessionUserId: 
   const player = await DB.query.Players.findFirst({ where: and(eq(schema.Players.userId, sessionUserId), eq(schema.Players.leagueId, banPlayer.leagueId)) });
   if (!player?.admin) { throw new Error('cannotBanPlayer'); }
 
-  return await DB.update(schema.Players).set({ banned: true, admin: false }).where(eq(schema.Players.id, banPlayer.id)).returning();
+  await DB.update(schema.Players).set({ banned: true, admin: false }).where(eq(schema.Players.id, banPlayer.id));
+  return await DB.query.Players.findFirst({ where: eq(schema.Players.id, banPlayer.id) });
 }
 
 export async function unbanPlayer (event: Event, playerId: string, sessionUserId: string) {
@@ -133,7 +136,8 @@ export async function unbanPlayer (event: Event, playerId: string, sessionUserId
   const player = await DB.query.Players.findFirst({ where: and(eq(schema.Players.userId, sessionUserId), eq(schema.Players.leagueId, unbanPlayer.leagueId)) });
   if (!player?.admin) { throw new Error('cannotUnbanPlayer'); }
 
-  return await DB.update(schema.Players).set({ banned: false }).where(eq(schema.Players.id, unbanPlayer.id)).returning();
+  await DB.update(schema.Players).set({ banned: false }).where(eq(schema.Players.id, unbanPlayer.id));
+  return await DB.query.Players.findFirst({ where: eq(schema.Players.id, unbanPlayer.id) })
 }
 
 export async function addAdminPlayer (event: Event, playerId: string, sessionUserId: string) {
@@ -146,7 +150,8 @@ export async function addAdminPlayer (event: Event, playerId: string, sessionUse
   const player = await DB.query.Players.findFirst({ where: and(eq(schema.Players.userId, sessionUserId), eq(schema.Players.leagueId, adminPlayer.leagueId)) });
   if (!player?.admin) { throw new Error('cannotAddAdminPlayer'); }
 
-  return await DB.update(schema.Players).set({ admin: true }).where(eq(schema.Players.id, adminPlayer.id)).returning();
+  await DB.update(schema.Players).set({ admin: true }).where(eq(schema.Players.id, adminPlayer.id));
+  return await DB.query.Players.findFirst({ where: eq(schema.Players.id, adminPlayer.id) });
 }
 
 export async function remAdminPlayer (event: Event, playerId: string, sessionUserId: string) {
@@ -158,7 +163,8 @@ export async function remAdminPlayer (event: Event, playerId: string, sessionUse
   const player = await DB.query.Players.findFirst({ where: and(eq(schema.Players.userId, sessionUserId), eq(schema.Players.leagueId, adminPlayer.leagueId)) });
   if (!player?.admin) { throw new Error('cannotRemAdminPlayer'); }
 
-  return await DB.update(schema.Players).set({ admin: false }).where(eq(schema.Players.id, adminPlayer.id)).returning();
+  await DB.update(schema.Players).set({ admin: false }).where(eq(schema.Players.id, adminPlayer.id));
+  return await DB.query.Players.findFirst({ where: eq(schema.Players.id, adminPlayer.id) });
 }
 
 export async function getUserLeagues (event: Event, userId: string) {

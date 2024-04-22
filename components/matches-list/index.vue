@@ -26,7 +26,7 @@ const matchesByDate = computed(() => {
       }
       res[res.length - 1].matches.push(match);
     });
-  return [...res, ...res];
+  return [...res];
 });
 </script>
 
