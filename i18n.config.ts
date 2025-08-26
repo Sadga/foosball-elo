@@ -74,6 +74,7 @@ export default defineI18nConfig(() => ({
       invitePlayers: 'Invite Players',
       noPlayersYet: 'No players yet',
       noTeamsYet: 'No teams yet',
+      joinMyLeague: 'Join my league on Foosball Elo!',
     },
     it: {
       foosballElo: 'Foosball Elo',
@@ -148,6 +149,7 @@ export default defineI18nConfig(() => ({
       invitePlayers: 'Invita Giocatori',
       noPlayersYet: 'Ancora nessun giocatore',
       noTeamsYet: 'Ancora nessuna squadra',
+      joinMyLeague: 'Unisciti alla mia lega su Foosball Elo!',
     }
   }
 }));
